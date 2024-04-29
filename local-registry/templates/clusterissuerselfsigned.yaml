@@ -3,6 +3,7 @@ kind: ClusterIssuer
 metadata:
   name: cluster-issuer-self-signed
   namespace: {{ .Values.namespace | default .Release.Namespace }}
+annotations:
   "helm.sh/hook": post-install
 spec:
   selfSigned: {}

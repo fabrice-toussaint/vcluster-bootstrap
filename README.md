@@ -24,6 +24,8 @@ This makes it possible to package and push the [vcluster](https://www.vcluster.c
 ```
 helm package vcluster-blueprint
 helm push vcluster-blueprint-{VERSION}.tgz oci://local-registry.com
+To test you can also pull:
+helm pull oci://local-registry.com/vcluster-blueprint --version 0.1.0
 ```
 To upgrade and install vcluster-child
 ```
