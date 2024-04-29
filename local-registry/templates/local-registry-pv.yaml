@@ -1,0 +1,29 @@
+{{- if .Values.persistence.enabled }}
+{{- if not .Values.persistence.existingClaim -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ template "local-registry.fullname" . }}-pv
+  namespace: {{ .Values.namespace | default .Release.Namespace }}
+  labels:
+    app: {{ template "local-registry.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    type: local
+spec:
+{{- if .Values.persistence.storageClass }}
+{{- if (eq "-" .Values.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+  capacity:
+    storage: "{{ .Values.persistence.size }}"
+  accessModes:
+    - {{ .Values.persistence.accessMode | quote }}
+  hostPath:
+    path: "{{ .Values.persistence.hostPath }}"
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end -}}

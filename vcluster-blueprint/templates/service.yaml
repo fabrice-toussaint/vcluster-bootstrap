@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: 5000
+      targetPort: http
+      protocol: TCP
+      name: xxx
   selector:
     {{- include "vcluster-blueprint.selectorLabels" . | nindent 4 }}

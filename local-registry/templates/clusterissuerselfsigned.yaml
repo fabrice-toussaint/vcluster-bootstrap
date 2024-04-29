@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cluster-issuer-self-signed
+  namespace: {{ .Values.namespace | default .Release.Namespace }}
+  "helm.sh/hook": post-install
+spec:
+  selfSigned: {}
+#  acme:
+#    server: https://acme-v02.api.letsencrypt.org/directory
+#    email: fabrice.toussaint@sendcloud.com
+#    privateKeySecretRef:
+#      name: letsencrypt-prod
+#    solvers:
+#      - http01:
+#          ingress:
+#            class: ingress
